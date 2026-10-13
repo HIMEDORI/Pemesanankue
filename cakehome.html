@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cake Cream Shop</title>
+
+  <link rel="stylesheet" href="cakecss.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+  <div class="logo">
+    🍰 Cake Cream
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="">Home</a></li>
+    <li><a href="halaman2cake.html">Produk</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-left">
+
+    <h1>
+      Simply Delicious <br>
+      Truly Tasty
+    </h1>
+
+    <p>
+      Toko kue terbaik dengan berbagai pilihan rasa premium.
+    </p>
+
+    <div class="buttons">
+      <button class="btn-primary">Order Now</button>
+      <button class="btn-secondary">Open Catalog</button>
+    </div>
+
+  </div>
+
+  <div class="hero-right">
+
+    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800">
+
+    <img src="https://images.unsplash.com/photo-1559622214-f8a9850965bb?q=80&w=800">
+
+  </div>
+
+</section>
+
+<!-- INFO -->
+<section class="info-box">
+
+  <div class="info-item">
+    <h2>50+</h2>
+    <p>Produk Kue</p>
+  </div>
+
+  <div class="info-item">
+    <h2>5K+</h2>
+    <p>Pelanggan</p>
+  </div>
+
+  <div class="info-item">
+    <h2>20K+</h2>
+    <p>Penjualan</p>
+  </div>
+
+</section>
+
+<!-- PRODUK -->
+<section class="products">
+
+  <h2 class="section-title">
+    Top Seller Cake
+  </h2>
+
+  <div class="product-container">
+
+    <!-- CARD -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?q=80&w=800">
+      <h3>Red Velvet Cake</h3>
+      <p class="rasa">Rasa : Strawberry Cream</p>
+      <span class="badge">Top Seller</span>
+      <div class="price">Rp 85.000</div>
+      <button onclick="tambahKeranjang('Red Velvet Cake',85000)">
+        Tambah Keranjang
+      </button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1602351447937-745cb720612f?q=80&w=800">
+      <h3>Chocolate Cake</h3>
+      <p class="rasa">Rasa : Choco Lava</p>
+      <span class="badge">Promo 20%</span>
+      <div class="price">Rp 95.000</div>
+      <button onclick="tambahKeranjang('Chocolate Cake',95000)">
+        Tambah Keranjang
+      </button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800">
+      <h3>Banana Cake</h3>
+      <p class="rasa">Rasa : Banana Milk</p>
+      <span class="badge">Recommended</span>
+      <div class="price">Rp 75.000</div>
+      <button onclick="tambahKeranjang('Banana Cake',75000)">
+        Tambah Keranjang
+      </button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=800">
+      <h3>Coffee Cake</h3>
+      <p class="rasa">Rasa : Cappuccino</p>
+      <span class="badge">Best Taste</span>
+      <div class="price">Rp 90.000</div>
+      <button onclick="tambahKeranjang('Coffee Cake',90000)">
+        Tambah Keranjang
+      </button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1464306076886-da185f6a9d05?q=80&w=800">
+      <h3>Cheese Cake</h3>
+      <p class="rasa">Rasa : Cheese Cream</p>
+      <span class="badge">Top Seller</span>
+      <div class="price">Rp 88.000</div>
+      <button onclick="tambahKeranjang('Cheese Cake',88000)">
+        Tambah Keranjang
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- KERANJANG -->
+<section class="cart-section">
+
+  <h2>Keranjang Belanja</h2>
+
+  <div id="cart-items">
+
+    <p class="empty">
+      Keranjang masih kosong
+    </p>
+
+  </div>
+
+  <h3 id="total">
+    Total : Rp 0
+  </h3>
+
+</section>
+
+<!-- CHECKOUT -->
+<section class="checkout">
+
+  <h2>Checkout Sederhana</h2>
+
+  <form id="checkoutForm">
+
+    <input type="text"
+    placeholder="Nama Lengkap"
+    required>
+
+    <input type="text"
+    placeholder="Alamat"
+    required>
+
+    <input type="text"
+    placeholder="Nomor HP"
+    required>
+
+    <select required>
+
+      <option value="">
+        Pilih Metode Pembayaran
+      </option>
+
+      <option>COD (Bayar Di Tempat)</option>
+      <option>Transfer Bank</option>
+      <option>DANA</option>
+      <option>OVO</option>
+      <option>GoPay</option>
+
+    </select>
+
+    <button type="submit">
+      Checkout Sekarang
+    </button>
+
+  </form>
+
+</section>
+
+<!-- JAVASCRIPT -->
+<script>
+
+let cart = [];
+let totalHarga = 0;
+
+function tambahKeranjang(nama, harga){
+
+  cart.push({
+    nama: nama,
+    harga: harga
+  });
+
+  tampilKeranjang();
+}
+
+function hapusItem(index){
+
+  cart.splice(index,1);
+
+  tampilKeranjang();
+}
+
+function tampilKeranjang(){
+
+  const cartItems =
+    document.getElementById("cart-items");
+
+  const total =
+    document.getElementById("total");
+
+  cartItems.innerHTML = "";
+
+  totalHarga = 0;
+
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+      <p class="empty">
+        Keranjang masih kosong
+      </p>
+    `;
+
+  }
+
+  cart.forEach((item,index) => {
+
+    totalHarga += item.harga;
+
+    cartItems.innerHTML += `
+
+      <div class="cart-item">
+
+        <div>
+          <h4>${item.nama}</h4>
+          <p>Rp ${item.harga.toLocaleString()}</p>
+        </div>
+
+        <button class="hapus-btn"
+        onclick="hapusItem(${index})">
+
+          Hapus
+
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+  total.innerHTML = `
+    Total : Rp ${totalHarga.toLocaleString()}
+  `;
+}
+
+document
+.getElementById("checkoutForm")
+.addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  if(cart.length === 0){
+
+    alert("Keranjang masih kosong!");
+
+    return;
+  }
+
+  alert(
+    "Checkout berhasil 🎂"
+  );
+
+  cart = [];
+
+  tampilKeranjang();
+
+  this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
