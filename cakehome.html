@@ -149,166 +149,32 @@
 
 </section>
 
-<!-- KERANJANG -->
-<section class="cart-section">
+<!-- PESAN TOAST -->
+<div id="toast" class="toast">
+  ✅ Berhasil ditambahkan ke keranjang!
+</div>
 
-  <h2>Keranjang Belanja</h2>
-
-  <div id="cart-items">
-
-    <p class="empty">
-      Keranjang masih kosong
-    </p>
-
-  </div>
-
-  <h3 id="total">
-    Total : Rp 0
-  </h3>
-
-</section>
-
-<!-- CHECKOUT -->
-<section class="checkout">
-
-  <h2>Checkout Sederhana</h2>
-
-  <form id="checkoutForm">
-
-    <input type="text"
-    placeholder="Nama Lengkap"
-    required>
-
-    <input type="text"
-    placeholder="Alamat"
-    required>
-
-    <input type="text"
-    placeholder="Nomor HP"
-    required>
-
-    <select required>
-
-      <option value="">
-        Pilih Metode Pembayaran
-      </option>
-
-      <option>COD (Bayar Di Tempat)</option>
-      <option>Transfer Bank</option>
-      <option>DANA</option>
-      <option>OVO</option>
-      <option>GoPay</option>
-
-    </select>
-
-    <button type="submit">
-      Checkout Sekarang
-    </button>
-
-  </form>
-
-</section>
-
-<!-- JAVASCRIPT -->
 <script>
 
-let cart = [];
-let totalHarga = 0;
-
 function tambahKeranjang(nama, harga){
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   cart.push({
     nama: nama,
     harga: harga
   });
 
-  tampilKeranjang();
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  const toast = document.getElementById("toast");
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
+
 }
-
-function hapusItem(index){
-
-  cart.splice(index,1);
-
-  tampilKeranjang();
-}
-
-function tampilKeranjang(){
-
-  const cartItems =
-    document.getElementById("cart-items");
-
-  const total =
-    document.getElementById("total");
-
-  cartItems.innerHTML = "";
-
-  totalHarga = 0;
-
-  if(cart.length === 0){
-
-    cartItems.innerHTML = `
-      <p class="empty">
-        Keranjang masih kosong
-      </p>
-    `;
-
-  }
-
-  cart.forEach((item,index) => {
-
-    totalHarga += item.harga;
-
-    cartItems.innerHTML += `
-
-      <div class="cart-item">
-
-        <div>
-          <h4>${item.nama}</h4>
-          <p>Rp ${item.harga.toLocaleString()}</p>
-        </div>
-
-        <button class="hapus-btn"
-        onclick="hapusItem(${index})">
-
-          Hapus
-
-        </button>
-
-      </div>
-
-    `;
-
-  });
-
-  total.innerHTML = `
-    Total : Rp ${totalHarga.toLocaleString()}
-  `;
-}
-
-document
-.getElementById("checkoutForm")
-.addEventListener("submit", function(e){
-
-  e.preventDefault();
-
-  if(cart.length === 0){
-
-    alert("Keranjang masih kosong!");
-
-    return;
-  }
-
-  alert(
-    "Checkout berhasil 🎂"
-  );
-
-  cart = [];
-
-  tampilKeranjang();
-
-  this.reset();
-
-});
 
 </script>
 

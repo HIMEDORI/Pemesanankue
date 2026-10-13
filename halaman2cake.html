@@ -357,6 +357,7 @@
     Total : Rp 0
   </h3>
 
+</section>
 
 
 <!-- CHECKOUT -->
@@ -430,23 +431,29 @@
 <!-- JAVASCRIPT -->
 <script>
 
-let cart = [];
+// ===== DATA KERANJANG =====
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let totalHarga = 0;
 
-function tambahKeranjang(nama, harga){
+function simpanKeranjang(){
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
+// ===== KERANJANG =====
+
+function tambahKeranjang(nama, harga){
   cart.push({
     nama: nama,
     harga: harga
   });
-
+  simpanKeranjang();
   tampilKeranjang();
 }
 
 function hapusItem(index){
-
-  cart.splice(index,1);
-
+  cart.splice(index, 1);
+  simpanKeranjang();
   tampilKeranjang();
 }
 
@@ -456,66 +463,59 @@ function tampilKeranjang(){
   const total = document.getElementById("total");
 
   cartItems.innerHTML = "";
-
   totalHarga = 0;
 
   if(cart.length === 0){
-
     cartItems.innerHTML = `
-      <p class="empty">
-        Keranjang masih kosong
-      </p>
+      <p class="empty">Keranjang masih kosong</p>
     `;
   }
 
-  cart.forEach((item,index) => {
+  cart.forEach((item, index) => {
 
-    totalHarga += item.harga;
+    const harga = Number(item.harga) || 0;
+    totalHarga += harga;
 
     cartItems.innerHTML += `
-
       <div class="cart-item">
-
         <div>
           <h4>${item.nama}</h4>
-          <p>Rp ${item.harga.toLocaleString()}</p>
+          <p>Rp ${harga.toLocaleString("id-ID")}</p>
         </div>
-
-        <button 
-          class="hapus-btn"
-          onclick="hapusItem(${index})"
-        >
+        <button class="hapus-btn" onclick="hapusItem(${index})">
           Hapus
         </button>
-
       </div>
-
     `;
   });
 
   total.innerHTML = `
-    Total : Rp ${totalHarga.toLocaleString()}
+    Total : Rp ${totalHarga.toLocaleString("id-ID")}
   `;
 }
+
+// PENTING! Tampilkan isi keranjang saat halaman dibuka
+tampilKeranjang();
+
+// ===== CHECKOUT =====
 
 function checkout(event){
 
   event.preventDefault();
 
   if(cart.length === 0){
-
     alert("Keranjang masih kosong!");
     return;
   }
 
   alert("Pembayaran berhasil!");
-
   cart = [];
-
+  simpanKeranjang();
   tampilKeranjang();
-
   document.querySelector("form").reset();
 }
+
+// ===== SEARCH =====
 
 function searchCake(){
 
@@ -527,22 +527,10 @@ function searchCake(){
   let cards = document.querySelectorAll(".card");
 
   cards.forEach((card) => {
-
-    let title = card
-      .querySelector("h3")
-      .innerText
-      .toLowerCase();
-
-    if(title.includes(input)){
-
-      card.style.display = "block";
-
-    } else {
-
-      card.style.display = "none";
-    }
-
+    let title = card.querySelector("h3").innerText.toLowerCase();
+    card.style.display = title.includes(input) ? "block" : "none";
   });
+
 }
 
 </script>
